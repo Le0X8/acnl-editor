@@ -18,3 +18,45 @@ noscript {
   pointer-events: none;
   z-index: 9999;
 }
+
+#savegame-load {
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #370d;
+  color: #fff;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.tabs-tabs {
+  display: flex;
+  gap: 0.25rem;
+  margin: 1rem 0;
+
+  button {
+    background-color: #0000;
+    border: 1px solid #370;
+    cursor: pointer;
+
+    &.active {
+      background-color: #370;
+      color: #fff;
+      cursor: default;
+    }
+  }
+}
+
+.tabs-content > div {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
