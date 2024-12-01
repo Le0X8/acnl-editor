@@ -2,6 +2,11 @@
 	import '$styles/global.scss';
 	import { onMount } from 'svelte';
 	import { loadLeosSavegame } from '$lib/load';
+	import { layoutGlobal } from '$lib/global';
+
+  onMount(() => {
+    layoutGlobal();
+  });
 
 	let { children } = $props();
 </script>
@@ -17,7 +22,8 @@
   <h3>Load savegame</h3>
   <input type="file" id="savegame-file" accept=".dat" />
   or
-  <button onclick={loadLeosSavegame} id="leos-savegame">Load Leo's savegame</button>
+  <button onclick={() => loadLeosSavegame('garden_plus')} id="leos-garden_plus">Load Leo's town</button>
+  <button onclick={() => loadLeosSavegame('exhibition')} id="leos-exhibition">Load Leo's HH Showcase</button>
 </div>
 
 {@render children()}

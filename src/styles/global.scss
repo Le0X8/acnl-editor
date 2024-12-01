@@ -60,3 +60,13 @@ noscript {
     display: block;
   }
 }
+
+#savegame-loaded {
+  width: calc(100% - 0.5rem);
+  text-align: center;
+  font-variant: small-caps;
+  color: #370;
+  border: 2px solid #370;
+  padding: 0.25rem;
+  font-weight: bold;
+}

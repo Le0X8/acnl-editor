@@ -1,30 +1,39 @@
 <script lang="ts">
-	import Tabs from '$c/Tabs.svelte';
-  import global from '$lib/global';
+	import TownEditor from '$c/TownEditor.svelte';
+	import global from '$lib/global';
+	import { unloadSavegame, downloadSavegame } from '$lib/load';
 	import { onMount } from 'svelte';
 
 	let savegameLoaded = $state(false);
+	let savegameType = $state('garden_plus');
 	onMount(() => {
-    global();
+		global();
 		savegameLoaded = storage.get('savegameLoaded') as boolean;
+		savegameType = storage.get('savegameType') as string;
 
 		storage.watch('savegameLoaded', (value) => {
 			savegameLoaded = value as boolean;
 		});
+		storage.watch('savegameType', (value) => {
+			savegameType = value as string;
+		});
 	});
 </script>
 
-<p>
-	{#if savegameLoaded}
-		Savegame loaded. <button>Unload</button>
-	{:else}
-		No savegame loaded.
-	{/if}
-</p>
+{#if savegameLoaded}
+	<div id="savegame-loaded">
+		<span>
+			{#if savegameType === 'garden_plus'}Town savegame (Welcome Amiibo){/if}
+			{#if savegameType === 'exhibition'}HH Showcase{/if}
+		</span>
+		loaded. ({savegameType}.dat)
+		<button onclick={() => unloadSavegame()}>Unload</button>
+		<button onclick={() => downloadSavegame()}>Download</button>
+	</div>
 
-<Tabs titles={['Player 1', 'Player 2', 'Player 3', 'Player 4']}>
-	<div>Player 1</div>
-	<div>Player 2</div>
-	<div>Player 3</div>
-	<div>Player 4</div>
-</Tabs>
+	{#if savegameType === 'garden_plus'}
+		<TownEditor />
+	{/if}
+{:else}
+	No savegame loaded.
+{/if}
