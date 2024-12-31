@@ -1,7 +1,13 @@
 @use '@fontsource-variable/inter';
+@use 'modern-normalize';
 
 body {
   font-family: 'Inter', sans-serif;
+  margin: 0.5rem;
+}
+
+button, input, optgroup, select, textarea {
+  font-size: 0.85rem;
 }
 
 noscript {
@@ -55,9 +61,14 @@ noscript {
 
 .tabs-content > div {
   display: none;
+  flex-direction: column;
 
   &.active {
-    display: block;
+    display: flex;
+  }
+
+  & > div {
+    display: flex;
   }
 }
 
@@ -69,4 +80,103 @@ noscript {
   border: 2px solid #370;
   padding: 0.25rem;
   font-weight: bold;
+}
+
+input, label, select {
+  display: block;
+  margin-top: 0.5rem;
+  width: fit-content;
+  font-family: 'Inter', sans-serif;
+}
+
+label {
+  margin-right: 0.5rem;
+}
+
+input, select {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #370;
+  background-color: transparent;
+
+  &:disabled {
+    border-bottom-color: #ddd;
+  }
+}
+
+.villager-head {
+  height: 5rem;
+}
+
+.itemlist {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+  border-top: 1px solid #370;
+  border-left: 1px solid #370;
+  transform: translateY(0.35rem);
+  margin-bottom: 0.35rem;
+
+  .itemrow {
+    display: flex;
+  }
+
+  .item {
+    position: relative;
+    display: flex;
+    background: none;
+    border: none;
+    padding: 0;
+    height: calc(1.5rem + 1px);
+    width: calc(1.5rem + 1px);
+    border-bottom: 1px solid #370;
+    border-right: 1px solid #370;
+    transition-duration: 100ms;
+
+    img:hover {
+      background-color: #3704;
+
+      & ~ .tooltip {
+        opacity: 1;
+      }
+    }
+
+    .tooltip {
+      display: flex;
+      gap: 0.5rem;
+      opacity: 0;
+      transform: translateX(1px) translateY(-1px);
+      pointer-events: none;
+      z-index: 1000;
+      background-color: #370d;
+      color: #fff;
+      padding: 0 0.35rem;
+      height: calc(1.5rem + 2px);
+      width: fit-content;
+      white-space: nowrap;
+      align-items: center;
+      
+      .name {
+        font-size: 0.9rem;
+      }
+
+      .meta {
+        font-size: 0.66rem;
+        font-family: 'Cascadia Code', 'Noto Mono', 'Consolas', 'Roboto Mono', monospace;
+        opacity: 0.75;
+      }
+
+      .default {
+        font-size: 0.9rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: bold;
+      }
+    }
+
+    img {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
 }

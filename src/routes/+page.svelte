@@ -1,4 +1,5 @@
 <script lang="ts">
+	import ShowcaseEditor from '$c/ShowcaseEditor.svelte';
 	import TownEditor from '$c/TownEditor.svelte';
 	import global from '$lib/global';
 	import { unloadSavegame, downloadSavegame } from '$lib/load';
@@ -33,6 +34,9 @@
 
 	{#if savegameType === 'garden_plus'}
 		<TownEditor />
+	{/if}
+	{#if savegameType === 'exhibition'}
+		<ShowcaseEditor />
 	{/if}
 {:else}
 	No savegame loaded.
