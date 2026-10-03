@@ -112,9 +112,9 @@
 	</ul>
 
 	<p class={['mt-4']}>
-		Please read the {@render link('Instructions', resolve('#howto'))} and the {@render link(
+		Please read the {@render link('Instructions', resolve('/help#howto'))} and the {@render link(
 			'FAQ',
-			resolve('#faq')
+			resolve('/help#faq')
 		)}
 		carefully.
 	</p>
