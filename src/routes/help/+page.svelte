@@ -4,7 +4,9 @@
 	import logo from '#lib/resources/logo.png';
 
 	function copyToClipboard(text: string) {
-		var input = document.createElement('input');
+		const input = document.createElement('input');
+		input.disabled = true;
+		input.style.display = 'none';
 		input.value = text;
 
 		document.body.appendChild(input);
@@ -12,7 +14,7 @@
 		input.select();
 		input.setSelectionRange(0, 99999); /* mobile fix */
 
-		document.execCommand('copy');
+		navigator.clipboard.writeText(input.value);
 
 		document.body.removeChild(input);
 	}
@@ -25,21 +27,23 @@
 			copyToClipboard(String.fromCharCode(c));
 		}
 	});
+
+	const h2 = [
+		'border-l-6',
+		'border-green-700 dark:border-green-600',
+		'text-green-700 dark:text-green-600',
+		'font-bold',
+		'pl-4',
+		'text-2xl',
+		'my-8'
+	];
+	const h3 = ['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg'];
+	const ol = ['list-decimal', 'list-outside', 'ml-8'];
+	const ul = ['list-disc', 'list-outside', 'ml-8'];
 </script>
 
 <svelte:head>
 	<title>Help - Animal Crossing: New Leaf Save Editor</title>
-	<link rel="shortcut icon" href={logo} />
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<meta
-		name="viewport"
-		content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"
-	/>
-	<meta name="description" content="An Animal Crossing: New Leaf town and items editor." />
-	<meta
-		name="keywords"
-		content="animal, crossing, new, leaf, save, editor, ram, town, pockets, items, hack, exploit"
-	/>
 </svelte:head>
 
 {#snippet link(text: string, href: string)}
@@ -85,11 +89,11 @@
 
 	<h2 class={['font-bold', 'mt-4']}>Features:</h2>
 
-	<ul class={['list-disc', 'list-outside', 'ml-8']}>
+	<ul class={ul}>
 		<li>can edit any ACNL savegame (including Welcome Amiibo)</li>
 		<li>
 			can edit your town
-			<ul class={['list-disc', 'list-outside', 'ml-8']}>
+			<ul class={ul}>
 				<li>acres, river, waterfalls and ponds</li>
 				<li>name, town hall and train station roof colors</li>
 				<li>move buildings, houses, rocks and more at your own</li>
@@ -99,7 +103,7 @@
 		<li>can edit your villagers (animals, campsite and caravan zone)</li>
 		<li>
 			other cool things
-			<ul class={['list-disc', 'list-outside', 'ml-8']}>
+			<ul class={ul}>
 				<li>put all perfect fruit trees in your town</li>
 				<li>put both police stations in your town</li>
 				<li>put anything in the beach, the river or the island</li>
@@ -129,32 +133,15 @@
 
 	<hr class={['my-8']} />
 
-	<h2
-		id="howto"
-		class={[
-			'border-l-6',
-			'border-green-700 dark:border-green-600',
-			'text-green-700 dark:text-green-600',
-			'font-bold',
-			'pl-4',
-			'text-2xl',
-			'my-8'
-		]}
-	>
-		How to dump and inject AC:NL savegame
-	</h2>
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		Requirements
-	</h3>
-	<ul class={['list-disc', 'list-outside', 'ml-8']}>
+	<h2 id="howto" class={h2}>How to dump and inject AC:NL savegame</h2>
+	<h3 class={h3}>Requirements</h3>
+	<ul class={ul}>
 		<li>a hacked Nintendo 3DS/XL, New Nintendo 3DS/XL, Nintendo 2DS or New Nintendo 2DS XL</li>
 		<li>retail/digital version of AC:NL with or without Welcome amiibo update</li>
 		<li>an updated web browser (recommended: {@render link('Firefox', 'https://firefox.com/')})</li>
 	</ul>
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		Hack your 3DS
-	</h3>
+	<h3 class={h3}>Hack your 3DS</h3>
 
 	<p>
 		Follow {@render link('this guide', 'https://3ds.hacks.guide/')} in order to hack your 3DS. This is
@@ -169,10 +156,8 @@
 		edited with the editor.
 	</p>
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		Extract savegame
-	</h3>
-	<ol class={['list-decimal', 'list-outside', 'ml-8']}>
+	<h3 class={h3}>Extract savegame</h3>
+	<ol class={ol}>
 		<li>Open <strong>Homebrew Launcher</strong></li>
 		<li>Open <strong>Checkpoint</strong></li>
 		<li>Choose <strong>AC:NL icon</strong> and press A</li>
@@ -180,10 +165,8 @@
 		<li>Power down the console, take out the SD card and put in the PC</li>
 	</ol>
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		Insert savegame
-	</h3>
-	<ol class={['list-decimal', 'list-outside', 'ml-8']}>
+	<h3 class={h3}>Insert savegame</h3>
+	<ol class={ol}>
 		<li>
 			Browse your SD card and make a backup of <strong
 				>/3DS/Checkpoint/saves/Animal Crossing New Leaf/[your_savegame_name]/</strong
@@ -239,14 +222,10 @@ Alternatively you can use <span class="app-icon purple"> </span> svdt which skip
 	<!-- <h3>Will I be banned if I play online with a hacked savegame?</h3>
 Yes, you might be banned from online functions if you change your TPC pic and use the Club Tortimer.<br/> -->
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		How can I rotate furniture in rooms?
-	</h3>
+	<h3 class={h3}>How can I rotate furniture in rooms?</h3>
 	<p>Right click on the desired furniture then left click to rotate it.</p>
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		How can I place perfect fruit trees?
-	</h3>
+	<h3 class={h3}>How can I place perfect fruit trees?</h3>
 	<p>
 		Select the desired tree in the Current item dropdown menu, then choose Perfect 4 in the Flag 1
 		dropdown menu. You can even put non-native perfect fruit trees!
@@ -261,13 +240,11 @@ Yes, you might be banned from online functions if you change your TPC pic and us
 No. The option was disabled since it lead to some glitches at a later point.
 It's better to let the game do it by itself. Just add any new PWP (street lamp, for example) in-game with Isabelle, pay it, then wait for the next day so you can edit it in the editor. -->
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		How can I move a building?
-	</h3>
+	<h3 class={h3}>How can I move a building?</h3>
 
 	<p>There are two ways to move a building:</p>
 
-	<ul class={['list-disc', 'list-outside', 'ml-8']}>
+	<ul class={ul}>
 		<li>
 			Mouse over the map, the cursor will turn into a hand if the existing building in the spot can
 			be moved. Click and hold, and move it to the desired location.
@@ -279,9 +256,7 @@ It's better to let the game do it by itself. Just add any new PWP (street lamp, 
 		</li>
 	</ul>
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		How can I add special characters to my name?
-	</h3>
+	<h3 class={h3}>How can I add special characters to my name?</h3>
 	Choose a special character here:
 	<Select.Root type="single" bind:value={charCode}>
 		<Select.Trigger class={['inline-flex', 'w-full', 'max-w-48']}>
@@ -485,34 +460,23 @@ It's better to let the game do it by itself. Just add any new PWP (street lamp, 
 	</Select.Root>
 	and it will be copied to the clipboard<br />Then paste it in the desired field.
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		I've injected Holden/Filly RVs, but they do not ask me to come to the town.
-	</h3>
+	<h3 class={h3}>I've injected Holden/Filly RVs, but they do not ask me to come to the town.</h3>
 	Both Holden and Filly are RV locked, so they cannot come to your town as villagers legally.<br />
 	The only way to have Holden/Filly as villagers is to inject them directly into your town into an existing
 	villager.
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		Your editor glitched my savegame!
-	</h3>
+	<h3 class={h3}>Your editor glitched my savegame!</h3>
 	No. It wasn't my editor, it was you.<br />
 	The editor can do cool things, but it's also a dangerous tool and you are the only responsible while
 	using it. Keep always a backup of your previous savegame.<br />
 	If you think you've found a bug, post your feedback
 	{@render link('here', 'https://gbatemp.net/threads/animal-crossing-new-leaf-save-editor.382965')}.
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
-		Can I create building seeds like Wild World?
-	</h3>
+	<h3 class={h3}>Can I create building seeds like Wild World?</h3>
 	No.
 
-	<h3
-		id="warnings"
-		class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}
-	>
-		What can I do to ensure my savegame does not get glitched?
-	</h3>
-	<ul class={['list-disc', 'list-outside', 'ml-8']}>
+	<h3 id="warnings" class={h3}>What can I do to ensure my savegame does not get glitched?</h3>
+	<ul class={ul}>
 		<li>
 			<b>there must be at least a pond, </b>
 		</li>
@@ -552,14 +516,14 @@ It's better to let the game do it by itself. Just add any new PWP (street lamp, 
 		</li>
 	</ul>
 
-	<h3 class={['text-amber-600 dark:text-amber-500', 'font-semibold', 'mt-6', 'mb-2', 'text-lg']}>
+	<h3 class={h3}>
 		The game says my savegame data is corrupted. What happened? Can I restore my savegame?
 	</h3>
 	That means you injected an old savegame, and the game blocked it using an anti-cheat protection system.<br
 	/> <br />
 
 	Do not worry, you can still restore it. You will need to update its secure NAND value.
-	<ol class={['list-decimal', 'list-outside', 'ml-8']}>
+	<ol class={ol}>
 		<li><b>Make a backup of your old savegame you want to restore</b></li>
 		<li>Restart your game and save. Make a dump of this new AC:NL savegame.</li>
 		<li>Open the <b>old</b> garden.dat/garden_plus.dat savegame in the editor</li>
