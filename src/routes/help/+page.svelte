@@ -17,11 +17,12 @@
 		document.body.removeChild(input);
 	}
 
-	let charCode: number = $state(0);
+	let charCode: string = $state('0');
 	$effect(() => {
-		if (charCode > 0) {
+		let c = parseInt(charCode);
+		if (c > 0) {
 			console.log(`Copying character code ${charCode} to clipboard`);
-			copyToClipboard(String.fromCharCode(charCode));
+			copyToClipboard(String.fromCharCode(c));
 		}
 	});
 </script>
