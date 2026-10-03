@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import * as Select from '#c/ui/select/index.ts';
+	import logo from '#lib/resources/logo.png';
 
 	function copyToClipboard(text: string) {
 		var input = document.createElement('input');
@@ -27,7 +28,7 @@
 
 <svelte:head>
 	<title>Help - Animal Crossing: New Leaf Save Editor</title>
-	<link rel="shortcut icon" href="/resources/logo.png" />
+	<link rel="shortcut icon" href={logo} />
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<meta
 		name="viewport"
@@ -72,7 +73,7 @@
 			'items-center'
 		]}
 	>
-		<img src="/resources/logo.png" alt="ACNL Save Editor Logo" class={['h-12']} />
+		<img src={logo} alt="ACNL Save Editor Logo" class={['h-12']} />
 		<h1 class={['mx-auto']}>Animal Crossing: New Leaf Save Editor</h1>
 	</hgroup>
 
